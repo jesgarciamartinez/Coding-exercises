@@ -1,3 +1,5 @@
+'use strict'
+
 $('#search').submit(function() {
     var term = $('#song').val();
     var url = 'https://api.spotify.com/v1/search?type=track&query=' + term;
@@ -30,6 +32,15 @@ $('.btn-play').click(function(){
         $('.btn-play').addClass('playing');
     }
 });
+
+function printTime () {
+  var current = $('.js-player').prop('currentTime');
+  console.debug('Current time: ' + current);
+  $('progress').prop('value', current);
+};
+
+$('.js-player').on('timeupdate', printTime);
+
 
 
 
