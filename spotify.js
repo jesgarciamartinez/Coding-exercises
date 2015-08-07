@@ -12,14 +12,23 @@ $('#search').submit(function() {
         if (result.tracks.items[0].album.images.length) {
             var imageUrl = result.tracks.items[0].album.images[0].url;
         }
-        console.log(imageUrl)
-        console.log(artistName)
-        console.log(songTitle)
+        console.log(imageUrl);
+        console.log(artistName);
+        console.log(songTitle);
         $('p.title').text(songTitle);
         $('p.author').text(artistName);
         $('img').prop('src', imageUrl);
         $('.js-player').prop('src', audioPreview);
+
+        var artistInfo = result.tracks.items[0].artists[0].href;
+        $.get(artistInfo, function(result2) {
+            console.log(result2)
+            var artistImage = result2.images[0].url;
+            $('.modal-header > h2').text(artistName);
+            $('.modal-body').html('<img src="' + artistImage + '">');
         });
+
+    });
 });
 
 $('.btn-play').click(function(){
@@ -38,31 +47,11 @@ function printTime () {
   console.debug('Current time: ' + current);
   $('progress').prop('value', current);
 };
-
 $('.js-player').on('timeupdate', printTime);
 
 
+$('a').click(function(event){
+    event.preventDefault();
+    $('.js-modal').modal();
+});
 
-
-
-
-
-
-
-function getHandler(id) {
-    return function() {
-        console.log('looking for ' + id);
-        var url = 'https://api.spotify.com/v1/artists/' + id + '/albums'
-        $.get(url, function(result) {
-            $('.albums').empty();
-            result.items.forEach(function(album) {
-                var imageUrl = '';
-                if (album.images.length) {
-                    imageUrl = album.images[0].url;
-                }
-                var code = '<li>' + album.name + ' <img src="' + imageUrl + '" width="50" height="50"></li>'
-                $('#s' + id).append(code);
-            });
-        });
-    }
-}
