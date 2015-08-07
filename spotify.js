@@ -6,7 +6,7 @@ $('#search').submit(function() {
         var artistName = result.tracks.items[0].artists[0].name;
         var songTitle = result.tracks.items[0].name;
         var imageUrl;
-        console.log(result.tracks.items[0].album.images[0].url)
+        var audioPreview = result.tracks.items[0].preview_url;
         if (result.tracks.items[0].album.images.length) {
             var imageUrl = result.tracks.items[0].album.images[0].url;
         }
@@ -16,7 +16,19 @@ $('#search').submit(function() {
         $('p.title').text(songTitle);
         $('p.author').text(artistName);
         $('img').prop('src', imageUrl);
+        $('.js-player').prop('src', audioPreview);
         });
+});
+
+$('.btn-play').click(function(){
+    if  ($('.btn-play').hasClass('playing')){
+        $('.btn-play').removeClass('playing');
+        $('.js-player').trigger('pause');
+    }
+    else{
+        $('.js-player').trigger('play')
+        $('.btn-play').addClass('playing');
+    }
 });
 
 
