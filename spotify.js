@@ -25,7 +25,7 @@ $('#search').submit(function() {
             console.log(result2)
             var artistImage = result2.images[0].url;
             $('.modal-header > h2').text(artistName);
-            $('.modal-body').html('<img src="' + artistImage + '">');
+            $('.modal-body').html('<img src="' + artistImage + '" width=100% height=100% alt="The Mars Volta">');
         });
 
     });
