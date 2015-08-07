@@ -21,15 +21,19 @@ $('#search').submit(function() {
         $('.js-player').prop('src', audioPreview);
 
         var artistInfo = result.tracks.items[0].artists[0].href;
-        $.get(artistInfo, function(result2) {
+        modalInfo(artistInfo);
+
+    });
+});
+
+function modalInfo(artistInfo){
+    $.get(artistInfo, function(result2) {
             console.log(result2)
             var artistImage = result2.images[0].url;
             $('.modal-header > h2').text(artistName);
             $('.modal-body').html('<img src="' + artistImage + '" width=100% height=100% alt="The Mars Volta">');
         });
-
-    });
-});
+};
 
 $('.btn-play').click(function(){
     if  ($('.btn-play').hasClass('playing')){
