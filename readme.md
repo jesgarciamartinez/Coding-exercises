@@ -1,3 +1,3 @@
-# Coding Exercises
-Ruby, Sinatra, Rails, Javascript, HTML/CSS exercises
+# Spotify exercise
+Javascript, HTML/CSS, jQuery, Spotify API
 
